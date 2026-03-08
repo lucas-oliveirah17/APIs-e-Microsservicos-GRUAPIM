@@ -1,85 +1,91 @@
 package aula01.lanchonete;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 /**
- * Classe principal para testar o protótipo do sistema da lanchonete "Quase Três Lanches".
- * Demonstra herança, polimorfismo e as funcionalidades de Pedido.
+ * Ponto de entrada do sistema da Lanchonete.
+ * Contém apenas o loop principal e a lógica de controle de fluxo.
+ * Exibição de menus → MenuLanchonete | Leitura segura → EntradaUtil
  */
 public class MainLanchonete {
+
+    static final Prato[] CARDAPIO = {
+        new Pizza(49.90,  LocalDate.of(2026,12,31), 800, "Frango c/ catupiry", "recheada c/ catupiry", "tomate"),
+        new Pizza(55.00,  LocalDate.of(2026,12,31), 850, "Calabresa",          "simples",              "tomate"),
+        new Lanche(28.50, LocalDate.of(2026,12,31), 350, "brioche",  "carne artesanal",  "maionese defumada"),
+        new Lanche(24.00, LocalDate.of(2026,12,31), 300, "integral", "frango grelhado",  "mostarda mel"),
+        new Salgadinho(7.00, LocalDate.of(2026,8,15), 100, "frito",  "massa de coxinha", "frango"),
+        new Salgadinho(5.50, LocalDate.of(2026,8,15),  80, "assado", "massa folhada",    "queijo")
+    };
+
     public static void main(String[] args) {
+        Scanner sc     = new Scanner(System.in);
+        MenuLanchonete menu = new MenuLanchonete(sc);
+        Pedido pedidoAtual  = null;
+        int opcao;
 
-        // ── Criando itens do cardápio (polimorfismo: todos tratados como Prato) ──
-        Pizza pizza = new Pizza(
-                49.90,
-                LocalDate.of(2025, 12, 31),
-                800,
-                "Frango com catupiry",
-                "recheada com catupiry",
-                "tomate"
-        );
+        do {
+            menu.exibirMenuPrincipal();
+            opcao = menu.lerOpcaoMenu();
 
-        Lanche lanche = new Lanche(
-                28.50,
-                LocalDate.of(2025, 12, 31),
-                350,
-                "brioche",
-                "carne artesanal",
-                "maionese defumada"
-        );
+            switch (opcao) {
+                case 1 -> menu.exibirCardapio(CARDAPIO);
+                case 2 -> pedidoAtual = novoPedido(menu);
+                case 3 -> adicionarItem(menu, pedidoAtual);
+                case 4 -> removerItem(menu, pedidoAtual);
+                case 5 -> listarItens(menu, pedidoAtual);
+                case 6 -> gerarNota(menu, pedidoAtual);
+                case 7 -> calcularTroco(menu, pedidoAtual);
+                case 0 -> menu.mensagemEncerrar();
+                default -> menu.mensagemOpcaoInvalida();
+            }
+        } while (opcao != 0);
 
-        Salgadinho coxinha = new Salgadinho(
-                7.00,
-                LocalDate.of(2025, 8, 15),
-                100,
-                "frito",
-                "massa de coxinha",
-                "frango"
-        );
+        sc.close();
+    }
 
-        Salgadinho enroladinho = new Salgadinho(
-                5.50,
-                LocalDate.of(2025, 8, 15),
-                80,
-                "assado",
-                "massa folhada",
-                "queijo"
-        );
+    // ── Ações do sistema ───────────────────────────────────────────────────
 
-        // ── Exibindo cardápio ──────────────────────────────────────────────────
-        System.out.println("╔══════════════════════════════════════════════════════╗");
-        System.out.println("║              CARDÁPIO - Quase Três Lanches           ║");
-        System.out.println("╚══════════════════════════════════════════════════════╝");
-        Prato[] cardapio = {pizza, lanche, coxinha, enroladinho};
-        for (Prato p : cardapio) {
-            System.out.println(p); // polimorfismo: chama toString() de cada subclasse via descricaoDetalhada()
-        }
+    static Pedido novoPedido(MenuLanchonete menu) {
+        String nome  = menu.lerNomeCliente();
+        double taxa  = menu.lerTaxaServico();
+        Pedido p     = new Pedido(nome, taxa);
+        System.out.printf("Pedido criado para \"%s\" com taxa de %.0f%%.%n", nome, taxa * 100);
+        return p;
+    }
 
-        // ── Criando pedido ─────────────────────────────────────────────────────
-        System.out.println("\n=== Criando pedido para o cliente 'João Silva' ===");
-        Pedido pedido = new Pedido("João Silva", 0.10); // 10% de taxa de serviço
+    static void adicionarItem(MenuLanchonete menu, Pedido pedido) {
+        if (pedido == null) { menu.mensagemPedidoInexistente(); return; }
+        menu.exibirCardapio(CARDAPIO);
+        int idx = menu.lerIndiceCardapio();
+        if (idx < 0 || idx >= CARDAPIO.length) { menu.mensagemItemInvalido(); return; }
+        pedido.adicionarItem(CARDAPIO[idx]);
+        System.out.println("Item adicionado: " + CARDAPIO[idx].descricaoDetalhada());
+    }
 
-        pedido.adicionarItem(pizza);
-        pedido.adicionarItem(lanche);
-        pedido.adicionarItem(coxinha);
-        pedido.adicionarItem(coxinha);   // 2 coxinhas
-        pedido.adicionarItem(enroladinho);
+    static void removerItem(MenuLanchonete menu, Pedido pedido) {
+        if (pedido == null || pedido.getItensConsumidos().isEmpty()) { menu.mensagemPedidoVazio(); return; }
+        menu.exibirItensPedido(pedido);
+        int idx = menu.lerIndiceRemocao();
+        pedido.removerItem(idx);
+        System.out.println("Item removido.");
+    }
 
-        // ── Nota fiscal ───────────────────────────────────────────────────────
+    static void listarItens(MenuLanchonete menu, Pedido pedido) {
+        if (pedido == null) { menu.mensagemPedidoInexistente(); return; }
+        menu.exibirItensPedido(pedido);
+    }
+
+    static void gerarNota(MenuLanchonete menu, Pedido pedido) {
+        if (pedido == null || pedido.getItensConsumidos().isEmpty()) { menu.mensagemPedidoVazio(); return; }
         pedido.mostrarFatura();
+    }
 
-        // ── Troco ─────────────────────────────────────────────────────────────
-        System.out.println("\n=== Cálculo de Troco ===");
-        pedido.calcularTroco(200.00);
-        pedido.calcularTroco(50.00);  // valor insuficiente
-
-        // ── Demonstrando validação de tipo de salgadinho ──────────────────────
-        System.out.println("\n=== Testando validação de tipo de salgadinho ===");
-        try {
-        	@SuppressWarnings("unused")
-            Salgadinho invalido = new Salgadinho(5.0, LocalDate.now(), 100, "grelhado", "massa", "queijo");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro capturado: " + e.getMessage());
-        }
+    static void calcularTroco(MenuLanchonete menu, Pedido pedido) {
+        if (pedido == null || pedido.getItensConsumidos().isEmpty()) { menu.mensagemPedidoVazio(); return; }
+        System.out.printf("Total do pedido: R$ %.2f%n", pedido.calcularTotal());
+        double recebido = menu.lerValorRecebido();
+        pedido.calcularTroco(recebido);
     }
 }

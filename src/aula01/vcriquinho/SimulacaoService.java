@@ -1,5 +1,7 @@
 package aula01.vcriquinho;
 
+import java.util.List;
+
 /**
  * Serviço responsável por calcular e exibir simulações de rendimento
  * para todos os tipos de conta de um cliente, dado um período em dias.
@@ -18,7 +20,7 @@ public class SimulacaoService {
         }
 
         System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
-        System.out.println("║              SIMULAÇÃO DE RENDIMENTOS — VcRiquinho           ║");
+        System.out.println("║              SIMULAÇÃO DE RENDIMENTOS — VcRiquinho          ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝");
         System.out.println("Cliente : " + cliente.getNome() + " (" + cliente.getTipoCliente() + ")");
         System.out.println("Período : " + dias + " dias");
