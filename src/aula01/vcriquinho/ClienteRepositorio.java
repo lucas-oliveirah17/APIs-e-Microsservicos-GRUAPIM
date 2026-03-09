@@ -2,7 +2,6 @@ package aula01.vcriquinho;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Repositório genérico em memória para CRUD de clientes.

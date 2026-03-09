@@ -1,7 +1,5 @@
 package aula01.vcriquinho;
 
-import java.util.List;
-
 /**
  * Serviço responsável por calcular e exibir simulações de rendimento
  * para todos os tipos de conta de um cliente, dado um período em dias.

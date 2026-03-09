@@ -1,8 +1,7 @@
-package br.com.academiadev.model;
+package aula02.academia.dev.model;
 
 public class Student extends User {
-
-    private SubscriptionPlan plan;
+	private SubscriptionPlan plan;
 
     public Student(String name, String email, SubscriptionPlan plan) {
         super(name, email);

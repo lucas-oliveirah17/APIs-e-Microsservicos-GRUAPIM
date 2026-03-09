@@ -1,11 +1,25 @@
-package br.com.academiadev.repository;
+package aula02.academia.dev.repository;
 
-import br.com.academiadev.model.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+
+import aula02.academia.dev.model.Admin;
+import aula02.academia.dev.model.BasicPlan;
+import aula02.academia.dev.model.Course;
+import aula02.academia.dev.model.CourseStatus;
+import aula02.academia.dev.model.DifficultyLevel;
+import aula02.academia.dev.model.Enrollment;
+import aula02.academia.dev.model.PremiumPlan;
+import aula02.academia.dev.model.Student;
+import aula02.academia.dev.model.SupportTicket;
+import aula02.academia.dev.model.User;
 
 public class Database {
-
-    public static final Map<String, Course>       courses     = new LinkedHashMap<>();
+	public static final Map<String, Course>       courses     = new LinkedHashMap<>();
     public static final Map<String, User>         users       = new LinkedHashMap<>();
     public static final List<Enrollment>          enrollments = new ArrayList<>();
     public static final Queue<SupportTicket>      ticketQueue = new LinkedList<>();

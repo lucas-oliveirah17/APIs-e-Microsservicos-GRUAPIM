@@ -1,18 +1,30 @@
-package br.com.academiadev;
+package aula02.academia.dev;
 
-import br.com.academiadev.exception.EnrollmentException;
-import br.com.academiadev.model.*;
-import br.com.academiadev.repository.Database;
-import br.com.academiadev.service.EnrollmentService;
-import br.com.academiadev.service.ReportService;
-import br.com.academiadev.util.GenericCsvExporter;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MainApplication {
+import aula02.academia.dev.exception.EnrollmentException;
+import aula02.academia.dev.model.Admin;
+import aula02.academia.dev.model.BasicPlan;
+import aula02.academia.dev.model.Course;
+import aula02.academia.dev.model.CourseStatus;
+import aula02.academia.dev.model.DifficultyLevel;
+import aula02.academia.dev.model.Enrollment;
+import aula02.academia.dev.model.PremiumPlan;
+import aula02.academia.dev.model.Student;
+import aula02.academia.dev.model.SupportTicket;
+import aula02.academia.dev.model.User;
+import aula02.academia.dev.repository.Database;
+import aula02.academia.dev.service.EnrollmentService;
+import aula02.academia.dev.service.ReportService;
+import aula02.academia.dev.util.GenericCsvExporter;
 
-    private static final Scanner sc = new Scanner(System.in);
+public class MainApplication {
+	private static final Scanner sc = new Scanner(System.in);
     private static User currentUser;
 
     // ─────────────────────────────────────────────────────────────────────────

@@ -1,17 +1,25 @@
-package br.com.academiadev.service;
+package aula02.academia.dev.service;
 
-import br.com.academiadev.model.*;
-import br.com.academiadev.repository.Database;
-
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
+
+import aula02.academia.dev.model.Course;
+import aula02.academia.dev.model.CourseStatus;
+import aula02.academia.dev.model.DifficultyLevel;
+import aula02.academia.dev.model.Enrollment;
+import aula02.academia.dev.model.Student;
+import aula02.academia.dev.repository.Database;
 
 /**
  * Serviço de relatórios — todos implementados com Stream API e Lambdas.
  */
 public class ReportService {
-
-    /**
+	/**
      * RF5.1 — Cursos por nível de dificuldade, ordenados alfabeticamente.
      */
     public static List<Course> coursesByDifficulty(DifficultyLevel level) {

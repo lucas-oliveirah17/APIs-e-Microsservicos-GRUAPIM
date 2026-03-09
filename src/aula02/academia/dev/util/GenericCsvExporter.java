@@ -1,4 +1,4 @@
-package br.com.academiadev.util;
+package aula02.academia.dev.util;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -8,8 +8,7 @@ import java.util.List;
  * Aceita qualquer lista de objetos e gera CSV apenas com os campos solicitados.
  */
 public class GenericCsvExporter {
-
-    public static <T> String export(List<T> data, List<String> fields) {
+	public static <T> String export(List<T> data, List<String> fields) {
         if (data == null || data.isEmpty()) return "(nenhum dado para exportar)\n";
 
         StringBuilder sb = new StringBuilder();

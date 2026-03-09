@@ -1,8 +1,7 @@
-package br.com.academiadev.model;
+package aula02.academia.dev.model;
 
 public class PremiumPlan implements SubscriptionPlan {
-
-    @Override
+	@Override
     public int getMaxCourses() {
         return Integer.MAX_VALUE;
     }

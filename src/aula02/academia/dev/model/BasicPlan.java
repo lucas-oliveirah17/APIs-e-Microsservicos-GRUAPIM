@@ -1,8 +1,7 @@
-package br.com.academiadev.model;
+package aula02.academia.dev.model;
 
 public class BasicPlan implements SubscriptionPlan {
-
-    private static final int MAX_COURSES = 3;
+	private static final int MAX_COURSES = 3;
 
     @Override
     public int getMaxCourses() {

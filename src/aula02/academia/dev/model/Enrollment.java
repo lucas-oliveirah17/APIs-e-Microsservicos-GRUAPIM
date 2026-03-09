@@ -1,8 +1,7 @@
-package br.com.academiadev.model;
+package aula02.academia.dev.model;
 
 public class Enrollment {
-
-    private Student student;
+	private Student student;
     private Course course;
     private double progress;
 

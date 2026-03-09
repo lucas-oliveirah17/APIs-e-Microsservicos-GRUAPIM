@@ -1,8 +1,7 @@
-package br.com.academiadev.model;
+package aula02.academia.dev.model;
 
 public class Course {
-
-    private String title;
+	private String title;
     private String description;
     private String instructorName;
     private int durationInHours;

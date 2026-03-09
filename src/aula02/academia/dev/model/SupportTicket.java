@@ -1,8 +1,7 @@
-package br.com.academiadev.model;
+package aula02.academia.dev.model;
 
 public class SupportTicket {
-
-    private String title;
+	private String title;
     private String message;
     private User author;
 

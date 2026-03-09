@@ -1,12 +1,11 @@
-package br.com.academiadev.model;
+package aula02.academia.dev.model;
 
 /**
  * Classe abstrata base para todos os usuários.
  * Encapsulamento: atributos protegidos acessados via getters.
  */
 public abstract class User {
-
-    protected String name;
+	protected String name;
     protected String email;
 
     public User(String name, String email) {
