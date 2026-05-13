@@ -1,16 +1,9 @@
-# --- Compiled class file ---
+# --- Build e Compilação (Maven / Gradle) ---
+target/
+build/
+dist/
+.gradle/
 *.class
-
-# --- Log file ---
-*.log
-
-# --- BlueJ files ---
-*.ctxt
-
-# --- Mobile Tools for Java (J2ME) ---
-.mtj.tmp/
-
-# --- Package Files ---
 *.jar
 *.war
 *.nar
@@ -19,12 +12,17 @@
 *.tar.gz
 *.rar
 
-# --- Virtual machine crash logs ---
-hs_err_pid*
-replay_pid*
+# --- Logs ---
+*.log
+**/logs/
+
+# --- IntelliJ IDEA ---
+.idea/
+*.iml
+*.iws
 
 # --- Eclipse IDE ---
-.metadata
+.metadata/
 bin/
 tmp/
 *.tmp
@@ -34,10 +32,21 @@ tmp/
 local.properties
 .settings/
 .loadpath
-.recommenders
+.project
+.classpath
+.recommenders/
+
+# --- Visual Studio Code ---
+.vscode/
+
+# --- Variáveis de Ambiente / Segredos ---
+.env
+.env.*
+*.properties.local
+application-local.properties
+application-local.yml
 
 # --- OS / Sistemas Operacionais ---
-
 # Windows
 Thumbs.db
 ehthumbs.db
@@ -50,7 +59,7 @@ $RECYCLE.BIN/
 .directory
 .Trash-*
 
-# macOS (Útil caso algum professor ou colega de grupo utilize)
+# macOS
 .DS_Store
 .AppleDouble
 .LSOverride
